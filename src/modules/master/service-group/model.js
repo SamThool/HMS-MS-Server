@@ -44,5 +44,5 @@ const billGroupSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const BillGroup = mongoose.model("BillGroup", billGroupSchema);
+const BillGroup = mongoose.model("BillGroupOld", billGroupSchema);
 export default BillGroup;
