@@ -6,7 +6,7 @@ import Appointment from "./model.js";
 export const createAppointment = async (req, res) => {
   const { uhid, department, consultant, appointmentDate, slot } = req.body;
 
-  if (!uhid || !department || !consultant || !appointmentDate || !slot) {
+  if ( !department || !consultant || !appointmentDate || !slot) {
     return res.status(400).json({
       message: "All fields are required",
     });
