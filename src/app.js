@@ -21,6 +21,7 @@ import paymentModeRoutes from "./modules/master/payment-mode/routes.js";
 import payeeCategoryRoutes from "./modules/master/payee-category/routes.js";
 // import serviceGroupRoutes from "./modules/master/service-group/routes.js";
 import billGroupRoutes from "./modules/master/bill-group/routes.js";
+import serviceListRoutes from "./modules/master/service-list/routes.js";
 import tpaRoutes from "./modules/master/tpa/routes.js";
 import gipsaaCompanyRoutes from "./modules/master/gipsaa/routes.js";
 import insuranceCompanyRoutes from "./modules/master/insurance/routes.js";
@@ -30,6 +31,8 @@ import corporateCompanyPrivateRoutes from "./modules/master/corporate-company-pr
 import doctorScheduleRoutes from "./modules/User/doctor-schedule/routes.js";
 import uhidRoutes from "./modules/UHID/routes.js";
 import appointmentRoutes from "./modules/opd/appointment/routes.js";
+import serviceRateRoutes from "./modules/master/service-rate/routes.js";
+
 const app = express();
 
 app.use(express.json());
@@ -49,6 +52,7 @@ app.use("/sub-ledger", subLedgerRoutes);
 app.use("/payment-mode", paymentModeRoutes);
 app.use("/payee-category", payeeCategoryRoutes);
 app.use("/bill-group", billGroupRoutes);
+app.use("/service-list", serviceListRoutes);
 // app.use("/service-group", serviceGroupRoutes);
 app.use("/tpa", tpaRoutes);
 app.use("/gipsaa-company", gipsaaCompanyRoutes);
@@ -66,5 +70,6 @@ app.use("/department-type", departmentTypeRoutes);
 app.use("/department-sub-type", departmentSubTypeRoutes);
 app.use("/department", departmentRoutes);
 app.use("/designation", designationRoutes);
+app.use("/service-rate", serviceRateRoutes);
 
 export default app;
