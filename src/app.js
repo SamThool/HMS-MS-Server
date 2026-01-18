@@ -35,7 +35,6 @@ import serviceRateRoutes from "./modules/master/service-rate/routes.js";
 import payeeRateConfigurationRoutes from "./modules/master/payee-rate-configuration/routes.js";
 
 const app = express();
-
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
