@@ -32,6 +32,7 @@ import doctorScheduleRoutes from "./modules/User/doctor-schedule/routes.js";
 import uhidRoutes from "./modules/UHID/routes.js";
 import appointmentRoutes from "./modules/opd/appointment/routes.js";
 import serviceRateRoutes from "./modules/master/service-rate/routes.js";
+import payeeRateConfigurationRoutes from "./modules/master/payee-rate-configuration/routes.js";
 
 const app = express();
 
@@ -57,6 +58,7 @@ app.use("/service-list", serviceListRoutes);
 app.use("/tpa", tpaRoutes);
 app.use("/gipsaa-company", gipsaaCompanyRoutes);
 app.use("/insurance-company", insuranceCompanyRoutes);
+
 app.use("/government-company", governmentCompanyRoutes);
 app.use("/corporate-company-public", corporateCompanyPublicRoutes);
 app.use("/corporate-company-private", corporateCompanyPrivateRoutes);
@@ -71,5 +73,6 @@ app.use("/department-sub-type", departmentSubTypeRoutes);
 app.use("/department", departmentRoutes);
 app.use("/designation", designationRoutes);
 app.use("/service-rate", serviceRateRoutes);
+app.use("/payee-rate-configuration", payeeRateConfigurationRoutes);
 
 export default app;
