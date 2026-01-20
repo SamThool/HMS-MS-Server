@@ -104,6 +104,5 @@ export const softDeleteAppointment = async (req, res) => {
 };
 
 export const softDeleteAppointmentById = async (appointmentId) => {
-  console.log(appointmentId);
   return Appointment.findByIdAndUpdate(appointmentId, { delete: true });
 };

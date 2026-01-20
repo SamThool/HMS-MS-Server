@@ -127,7 +127,7 @@ export const updateUHID = async (req, res) => {
     const updated = await UHID.findOneAndUpdate(
       { _id: id, deleted: false },
       req.body,
-      { new: true }
+      { new: true },
     );
 
     if (!updated) {
@@ -161,7 +161,7 @@ export const deleteUHID = async (req, res) => {
     const deleted = await UHID.findByIdAndUpdate(
       id,
       { deleted: true },
-      { new: true }
+      { new: true },
     );
 
     if (!deleted) {
@@ -184,10 +184,42 @@ export const deleteUHID = async (req, res) => {
   }
 };
 
+export const searchPatients = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    // basic guard
+    if (!q || q.length < 2) {
+      return res.json([]);
+    }
+
+    const regex = new RegExp(q, "i");
+
+    const patients = await UHID.find({
+      $or: [{ fname: regex }, { lname: regex }, { uhid: regex }],
+    })
+      .select("fname lname uhid mobileNumber")
+      .limit(10)
+      .sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      data: patients,
+    });
+  } catch (err) {
+    console.error("FOLLOW-UP SEARCH ERROR:", err);
+    res.status(500).json({
+      success: false,
+      data: [],
+    });
+  }
+};
+
 export default {
   createUHID,
   getAllUHIDs,
   getUHID,
   updateUHID,
   deleteUHID,
+  searchPatients,
 };
