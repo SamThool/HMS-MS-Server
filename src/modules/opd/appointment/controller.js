@@ -79,11 +79,9 @@ export const softDeleteAppointment = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const appointment = await Appointment.findByIdAndUpdate(
-      id,
-      { deleted: true },
-      { new: true },
-    );
+    const appointment = await Appointment.findByIdAndUpdate(id, {
+      delete: true,
+    });
 
     if (!appointment) {
       return res.status(404).json({
@@ -93,7 +91,7 @@ export const softDeleteAppointment = async (req, res) => {
 
     res.status(200).json({
       message: "Appointment deleted successfully",
-      data: appointment,
+      // data: appointment,
     });
   } catch (err) {
     console.error("softDeleteAppointment error:", err);
