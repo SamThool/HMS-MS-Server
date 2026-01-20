@@ -88,7 +88,7 @@ export const updatePayeeRateConfiguration = async (req, res) => {
         Payee: Payee || null,
         rateList,
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!updated) {
@@ -120,7 +120,7 @@ export const deletePayeeRateConfiguration = async (req, res) => {
     const deleted = await PayeeRateConfiguration.findByIdAndUpdate(
       id,
       { deleted: true },
-      { new: true }
+      { new: true },
     );
 
     if (!deleted) {
@@ -137,6 +137,51 @@ export const deletePayeeRateConfiguration = async (req, res) => {
   } catch (err) {
     console.error("deletePayeeRateConfiguration error:", err);
     res.status(500).json({
+      success: false,
+      message: err.message || "Server error",
+    });
+  }
+};
+
+// FIND PAYEE RATE CONFIGURATION (exact match)
+export const findPayeeRateConfiguration = async (req, res) => {
+  try {
+    const { category, parentPayee, payee } = req.body;
+
+    // Validation
+    if (!category) {
+      return res.status(400).json({
+        success: false,
+        message: "Category is required",
+      });
+    }
+
+    // Build exact-match query
+    const query = {
+      Category: category,
+      deleted: false,
+      ParentPayee: parentPayee || null,
+      Payee: payee || null,
+    };
+
+    const config =
+      await PayeeRateConfiguration.findOne(query).populate("rateList");
+
+    if (!config) {
+      return res.status(200).json({
+        success: false,
+        message: "No matching payee rate configuration found",
+        data: null,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: config,
+    });
+  } catch (err) {
+    console.error("findPayeeRateConfiguration error:", err);
+    return res.status(500).json({
       success: false,
       message: err.message || "Server error",
     });

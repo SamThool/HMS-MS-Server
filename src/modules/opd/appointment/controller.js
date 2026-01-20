@@ -6,7 +6,7 @@ import Appointment from "./model.js";
 export const createAppointment = async (req, res) => {
   const { uhid, department, consultant, appointmentDate, slot } = req.body;
 
-  if ( !department || !consultant || !appointmentDate || !slot) {
+  if (!department || !consultant || !appointmentDate || !slot) {
     return res.status(400).json({
       message: "All fields are required",
     });
@@ -61,11 +61,49 @@ export const getAppointmentsByDoctorAndDate = async (req, res) => {
  * GET ALL Appointments (Admin / reports)
  */
 export const getAllAppointments = async (req, res) => {
-  const appointments = await Appointment.find()
+  const appointments = await Appointment.find({
+    $or: [{ delete: false }, { delete: { $exists: false } }],
+  })
     .populate("uhid", "uhid fname mname lname")
     .populate("consultant", "firstName lastName employeeCode")
     .populate("department", "departmentName")
     .sort({ appointmentDate: -1, slot: 1 });
 
   res.status(200).json(appointments);
+};
+
+/**
+ * SOFT DELETE Appointment
+ */
+export const softDeleteAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const appointment = await Appointment.findByIdAndUpdate(
+      id,
+      { deleted: true },
+      { new: true },
+    );
+
+    if (!appointment) {
+      return res.status(404).json({
+        message: "Appointment not found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Appointment deleted successfully",
+      data: appointment,
+    });
+  } catch (err) {
+    console.error("softDeleteAppointment error:", err);
+    res.status(500).json({
+      message: "Failed to delete appointment",
+    });
+  }
+};
+
+export const softDeleteAppointmentById = async (appointmentId) => {
+  console.log(appointmentId);
+  return Appointment.findByIdAndUpdate(appointmentId, { delete: true });
 };

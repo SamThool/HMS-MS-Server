@@ -34,10 +34,15 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    delete: {
+      type: Boolean,
+      default: false,
+    },
   },
+
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("Appointment", appointmentSchema);

@@ -86,8 +86,15 @@ const uhidSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
+
+uhidSchema.index({
+  fname: "text",
+  lname: "text",
+  uhid: 1,
+  mobileNumber: 1,
+});
 
 const UHID = mongoose.model("UHID", uhidSchema);
 export default UHID;

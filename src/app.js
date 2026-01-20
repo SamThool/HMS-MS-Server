@@ -30,6 +30,7 @@ import corporateCompanyPublicRoutes from "./modules/master/corporate-company-pub
 import corporateCompanyPrivateRoutes from "./modules/master/corporate-company-private/routes.js";
 import doctorScheduleRoutes from "./modules/User/doctor-schedule/routes.js";
 import uhidRoutes from "./modules/UHID/routes.js";
+import OPDRoutes from "./modules/opd/registration/routes.js";
 import appointmentRoutes from "./modules/opd/appointment/routes.js";
 import serviceRateRoutes from "./modules/master/service-rate/routes.js";
 import payeeRateConfigurationRoutes from "./modules/master/payee-rate-configuration/routes.js";
@@ -57,7 +58,7 @@ app.use("/service-list", serviceListRoutes);
 app.use("/tpa", tpaRoutes);
 app.use("/gipsaa-company", gipsaaCompanyRoutes);
 app.use("/insurance-company", insuranceCompanyRoutes);
-
+app.use("/opd", OPDRoutes);
 app.use("/government-company", governmentCompanyRoutes);
 app.use("/corporate-company-public", corporateCompanyPublicRoutes);
 app.use("/corporate-company-private", corporateCompanyPrivateRoutes);
