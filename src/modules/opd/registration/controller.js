@@ -113,7 +113,7 @@ export const markOpdOut = async (req, res) => {
 export const getAllOpdPatients = async (req, res) => {
   try {
     const data = await OPDPatient.find()
-      .populate("patient", "uhid fname lname mobileNumber")
+      .populate("patient")
       .populate({
         path: "appointment",
         populate: [

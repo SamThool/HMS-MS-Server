@@ -34,6 +34,7 @@ import OPDRoutes from "./modules/opd/registration/routes.js";
 import appointmentRoutes from "./modules/opd/appointment/routes.js";
 import serviceRateRoutes from "./modules/master/service-rate/routes.js";
 import payeeRateConfigurationRoutes from "./modules/master/payee-rate-configuration/routes.js";
+import chiefComplaintMaster from "./modules/medical-master/chief-complaint-master/routes.js";
 
 const app = express();
 app.use(express.json());
@@ -56,6 +57,7 @@ app.use("/bill-group", billGroupRoutes);
 app.use("/service-list", serviceListRoutes);
 // app.use("/service-group", serviceGroupRoutes);
 app.use("/tpa", tpaRoutes);
+app.use("/chief-complaint-master", chiefComplaintMaster);
 app.use("/gipsaa-company", gipsaaCompanyRoutes);
 app.use("/insurance-company", insuranceCompanyRoutes);
 app.use("/opd", OPDRoutes);
