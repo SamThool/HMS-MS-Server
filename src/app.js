@@ -36,6 +36,14 @@ import serviceRateRoutes from "./modules/master/service-rate/routes.js";
 import payeeRateConfigurationRoutes from "./modules/master/payee-rate-configuration/routes.js";
 import chiefComplaintMaster from "./modules/medical-master/chief-complaint-master/routes.js";
 
+import pastHistoryRoutes from "./modules/medical-master/history-master/past-history/routes.js";
+import familyHistoryRoutes from "./modules/medical-master/history-master/family-history/routes.js";
+import allergyHistoryRoutes from "./modules/medical-master/history-master/allergies-history/routes.js";
+import procedureHistoryRoutes from "./modules/medical-master/history-master/procedure-history/routes.js";
+import drugHistoryRoutes from "./modules/medical-master/history-master/drug-history/routes.js";
+
+
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -43,6 +51,15 @@ app.use(helmet());
 
 // routes will go here later
 app.get("/", (req, res) => res.send("HMS MadeSimplified API running"));
+
+
+app.use("/past-history", pastHistoryRoutes);
+app.use("/family-history", familyHistoryRoutes);
+app.use("/allergy-history", allergyHistoryRoutes);
+app.use("/procedure-history", procedureHistoryRoutes);
+app.use("/drug-history", drugHistoryRoutes);
+
+
 app.use("/auth", authRoutes);
 app.use("/doctor-schedule", doctorScheduleRoutes);
 app.use("/appointment", appointmentRoutes);
