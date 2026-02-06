@@ -7,7 +7,7 @@ import roleRoutes from "./modules/master/role/routes.js";
 import prefixRoutes from "./modules/master/prefix/routes.js";
 import diplomaRoutes from "./modules/master/diploma/routes.js";
 import graduationRoutes from "./modules/master/graduation/routes.js";
-import diagnosisRoutes from "./modules/master/diagnosis/routes.js";
+import diagnosisRoutes from "./modules/medical-master/diagnosis/routes.js";
 import postGraduationRoutes from "./modules/master/PostGraduation/routes.js";
 import SuperSpecializationRoutes from "./modules/master/SuperSpecialization/routes.js";
 import councilRoutes from "./modules/master/Councils/routes.js";
@@ -35,7 +35,7 @@ import OPDRoutes from "./modules/opd/registration/routes.js";
 import appointmentRoutes from "./modules/opd/appointment/routes.js";
 import serviceRateRoutes from "./modules/master/service-rate/routes.js";
 import payeeRateConfigurationRoutes from "./modules/master/payee-rate-configuration/routes.js";
-import  hospitalSetupRoutes from "./modules/hospital-setup/routes.js"
+import hospitalSetupRoutes from "./modules/hospital-setup/routes.js";
 import chiefComplaintMaster from "./modules/medical-master/chief-complaint-master/routes.js";
 
 import pastHistoryRoutes from "./modules/medical-master/history-master/past-history/routes.js";
@@ -44,16 +44,24 @@ import allergyHistoryRoutes from "./modules/medical-master/history-master/allerg
 import procedureHistoryRoutes from "./modules/medical-master/history-master/procedure-history/routes.js";
 import drugHistoryRoutes from "./modules/medical-master/history-master/drug-history/routes.js";
 
-import medicineRoutes from "./modules/master/medicine/routes.js"
+import medicineRoutes from "./modules/medical-master/medicine/routes.js";
 
-import genericNameRoutes from "./modules/master/medicine/generic-name/routes.js"
-import typeMedRoutes from "./modules/master/medicine/med-type/routes.js"
-import routeMedRoutes from "./modules/master/medicine/med-route/routes.js"
-import medCategoryRoutes from "./modules/master/medicine/med-category/routes.js"
-import medDoseRoutes from "./modules/master/medicine/med-dose/routes.js"
-import brandNameRoutes from "./modules/master/medicine/brand-name/routes.js"
+import genericNameRoutes from "./modules/medical-master/medicine/generic-name/routes.js";
+import typeMedRoutes from "./modules/medical-master/medicine/med-type/routes.js";
+import routeMedRoutes from "./modules/medical-master/medicine/med-route/routes.js";
+import medCategoryRoutes from "./modules/medical-master/medicine/med-category/routes.js";
+import medDoseRoutes from "./modules/medical-master/medicine/med-dose/routes.js";
+import brandNameRoutes from "./modules/medical-master/medicine/brand-name/routes.js";
+import ExaminationMaster from "./modules/medical-master/examination-master/routes.js";
 
+import radiologyRoutes from "./modules/medical-master/radiology/routes.js";
+import pathologyRoutes from "./modules/medical-master/pathology/routes.js";
+import otherDiagnosisRoutes from "./modules/medical-master/otherDiagnosis/routes.js";
 
+import instructionRoutes from "./modules/medical-master/instruction/routes.js";
+import procedureRoutes from "./modules/medical-master/procedure/routes.js";
+
+import opdemrRoutes from "./modules/opd/opd-emr/routes.js";
 
 const app = express();
 app.use(express.json());
@@ -62,7 +70,6 @@ app.use(helmet());
 
 // routes will go here later
 app.get("/", (req, res) => res.send("HMS MadeSimplified API running"));
-
 
 app.use("/past-history", pastHistoryRoutes);
 app.use("/family-history", familyHistoryRoutes);
@@ -84,6 +91,8 @@ app.use("/payee-category", payeeCategoryRoutes);
 app.use("/bill-group", billGroupRoutes);
 app.use("/service-list", serviceListRoutes);
 // app.use("/service-group", serviceGroupRoutes);
+app.use("/procedure", procedureRoutes);
+app.use("/opd-emr", opdemrRoutes);
 app.use("/tpa", tpaRoutes);
 app.use("/chief-complaint-master", chiefComplaintMaster);
 app.use("/gipsaa-company", gipsaaCompanyRoutes);
@@ -94,6 +103,7 @@ app.use("/corporate-company-public", corporateCompanyPublicRoutes);
 app.use("/corporate-company-private", corporateCompanyPrivateRoutes);
 app.use("/prefix", prefixRoutes);
 app.use("/diploma", diplomaRoutes);
+app.use("/instruction", instructionRoutes);
 app.use("/graduation", graduationRoutes);
 app.use("/diagnosis", diagnosisRoutes);
 app.use("/post-graduation", postGraduationRoutes);
@@ -115,6 +125,10 @@ app.use("/med-category", medCategoryRoutes);
 app.use("/med-dose", medDoseRoutes);
 app.use("/brand-name", brandNameRoutes);
 
+app.use("/examination-master", ExaminationMaster);
 
+app.use("/radiology", radiologyRoutes);
+app.use("/pathology", pathologyRoutes);
+app.use("/other-diagnosis", otherDiagnosisRoutes);
 
 export default app;

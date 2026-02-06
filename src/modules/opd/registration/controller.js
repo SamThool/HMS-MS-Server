@@ -5,6 +5,7 @@ import {
   softDeleteAppointment,
   softDeleteAppointmentById,
 } from "../appointment/controller.js";
+import { createOpdEmr } from "../opd-emr/controller.js";
 
 /* -------------------------------- CREATE OPD -------------------------------- */
 export const createOpdPatient = async (req, res) => {
@@ -29,9 +30,13 @@ export const createOpdPatient = async (req, res) => {
       payee: payee || null,
     });
 
-    // delet soft appointment ---adi
+    await createOpdEmr({
+      patientId: patient,
+      opdId: opdPatient._id,
+      opdNo: opdno,
+    });
 
-    softDeleteAppointmentById(appointment);
+    await softDeleteAppointmentById(appointment);
 
     res.status(201).json({
       success: true,
